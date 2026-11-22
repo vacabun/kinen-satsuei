@@ -72,16 +72,24 @@ Git では、SSH のリポジトリ URL とブランチ、秘密鍵を指定し�
 dotnet run --project apps/windows/Kinen.Windows.Tests/Kinen.Windows.Tests.csproj -- fixtures/library-v1
 ```
 
-## GitHub Actions
+## GitHub Actions とリリース
 
-ブランチへのプッシュやプルリクエストをきっかけに、Apple 向け共通コードのテストと iOS シミュレータ版のビルドが実行されます。Git タグをプッシュすると、iPhone 向けと Apple Silicon Mac のシミュレータ向けのパッケージも生成されます。
+ブランチへのプッシュやプルリクエストごとに、iOS、macOS、Android、Windows のビルドと対象のテストが実行されます。手動実行では、公開前に各パッケージを Actions の Artifacts から確認できます。
+
+Git タグをプッシュすると、4 プラットフォームのパッケージがそろった時点で、同じタグの GitHub Release が公開されます。
 
 ```sh
 git tag v0.1.0
 git push origin v0.1.0
 ```
 
-対象のタグに対応する **Actions → iOS build and package → Artifacts** から `kinen-satsuei-ios` をダウンロードできます。
+公開済みのパッケージは、リポジトリの [Releases](https://github.com/vacabun/kinen-satsuei/releases) からダウンロードできます。
 
-- `KinenSatsuei-unsigned.ipa` は未署名の iPhone 向けパッケージです。通常の iPhone にインストールするには Apple の署名が必要です。
-- `KinenSatsuei-simulator-arm64.zip` は Apple Silicon Mac の iOS シミュレータ向けです。展開後の `.app` をシミュレータにインストールできます。
+| 対象 | ファイル | 配布形式 |
+| --- | --- | --- |
+| iPhone | `KinenSatsuei-unsigned.ipa` | 未署名。通常の iPhone にインストールするには Apple の署名が必要 |
+| iOS シミュレータ | `KinenSatsuei-simulator-arm64.zip` | Apple Silicon Mac 向け。展開後に `.app` をシミュレータへインストール可能 |
+| macOS | `KinenSatsuei-macos-arm64.zip` | Apple Silicon Mac 向け。アドホック署名済み、公証なし |
+| Android | `KinenSatsuei-android-unsigned.apk` | リリースビルド。配布には署名が必要 |
+| Android | `KinenSatsuei-android-debug.apk` | デバッグ署名済みの動作確認用。同じ鍵で署名されたビルドのみ上書きインストール可能 |
+| Windows | `KinenSatsuei-windows-x64.zip` | .NET ランタイムを同梱。展開後に `KinenSatsuei.exe` を起動 |

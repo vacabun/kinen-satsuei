@@ -1,0 +1,216 @@
+name: Build and release
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-and-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ios:
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      DERIVED_DATA: ${{ github.workspace }}/.tmp/kinen-build
+      DIST: ${{ github.workspace }}/.tmp/kinen-dist
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Test shared Apple code
+        run: swift test --package-path packages/apple
+
+      - name: Build iOS Simulator app
+        run: |
+          xcodebuild -project apps/ios/KinenSatsuei.xcodeproj -scheme KinenSatsuei \
+            -configuration Release -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$DERIVED_DATA" ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+
+      - name: Build unsigned iPhone app
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        run: |
+          xcodebuild -project apps/ios/KinenSatsuei.xcodeproj -scheme KinenSatsuei \
+            -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' \
+            -derivedDataPath "$DERIVED_DATA" CODE_SIGNING_ALLOWED=NO build
+
+      - name: Package iOS builds
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        run: |
+          products="$DERIVED_DATA/Build/Products"
+          staging="$(mktemp -d)"
+          trap 'rm -rf "$staging"' EXIT
+          mkdir -p "$staging/Payload" "$DIST"
+          ditto "$products/Release-iphoneos/KinenSatsuei.app" "$staging/Payload/KinenSatsuei.app"
+          ditto -c -k --keepParent "$staging/Payload" "$DIST/KinenSatsuei-unsigned.ipa"
+          ditto -c -k --keepParent "$products/Release-iphonesimulator/KinenSatsuei.app" \
+            "$DIST/KinenSatsuei-simulator-arm64.zip"
+
+      - name: Upload packages
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v7
+        with:
+          name: kinen-satsuei-ios
+          path: ${{ env.DIST }}
+          if-no-files-found: error
+          compression-level: 0
+
+  macos:
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Build macOS app
+        run: |
+          xcodebuild -project apps/macos/KinenSatsueiMac.xcodeproj -scheme KinenSatsueiMac \
+            -configuration Release -destination 'generic/platform=macOS' \
+            -derivedDataPath .tmp/macos-build ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+
+      - name: Package macOS app
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        run: |
+          app=.tmp/macos-build/Build/Products/Release/KinenSatsueiMac.app
+          codesign --force --sign - "$app"
+          codesign --verify --strict "$app"
+          mkdir -p .tmp/macos-dist
+          ditto -c -k --keepParent "$app" .tmp/macos-dist/KinenSatsuei-macos-arm64.zip
+
+      - uses: actions/upload-artifact@v7
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        with:
+          name: kinen-satsuei-macos
+          path: .tmp/macos-dist/KinenSatsuei-macos-arm64.zip
+          if-no-files-found: error
+          compression-level: 0
+
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+          cache-dependency-path: |
+            apps/android/**/*.gradle.kts
+            apps/android/gradle/wrapper/gradle-wrapper.properties
+
+      - name: Build and lint Android
+        working-directory: apps/android
+        run: ./gradlew --no-daemon assembleRelease assembleDebug lintRelease
+
+      - name: Package Android APKs
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir -p .tmp/android-dist
+          cp apps/android/app/build/outputs/apk/release/app-release-unsigned.apk \
+            .tmp/android-dist/KinenSatsuei-android-unsigned.apk
+          cp apps/android/app/build/outputs/apk/debug/app-debug.apk \
+            .tmp/android-dist/KinenSatsuei-android-debug.apk
+
+      - uses: actions/upload-artifact@v7
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        with:
+          name: kinen-satsuei-android
+          path: .tmp/android-dist/*.apk
+          if-no-files-found: error
+          compression-level: 0
+
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: packages/core/go.mod
+          cache-dependency-path: packages/core/go.sum
+
+      - name: Test Go core
+        working-directory: packages/core
+        run: go test ./...
+
+      - name: Test Windows data format
+        run: dotnet run --project apps/windows/Kinen.Windows.Tests/Kinen.Windows.Tests.csproj -- fixtures/library-v1
+
+      - name: Publish Windows app
+        run: >
+          dotnet publish apps/windows/Kinen.Windows/Kinen.Windows.csproj
+          -c Release -r win-x64 --self-contained true -o .tmp/windows-publish
+
+      - name: Package Windows app
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        run: |
+          foreach ($file in @('KinenSatsuei.exe', 'kinen-git.exe')) {
+            if (-not (Test-Path ".tmp/windows-publish/$file")) {
+              throw "Missing published file: $file"
+            }
+          }
+          New-Item -ItemType Directory -Path .tmp/windows-dist -Force | Out-Null
+          Compress-Archive -Path .tmp/windows-publish/* -DestinationPath .tmp/windows-dist/KinenSatsuei-windows-x64.zip
+
+      - uses: actions/upload-artifact@v7
+        if: github.ref_type == 'tag' || github.event_name == 'workflow_dispatch'
+        with:
+          name: kinen-satsuei-windows
+          path: .tmp/windows-dist/KinenSatsuei-windows-x64.zip
+          if-no-files-found: error
+          compression-level: 0
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: [ios, macos, android, windows]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: kinen-satsuei-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          files=(
+            release-assets/KinenSatsuei-unsigned.ipa
+            release-assets/KinenSatsuei-simulator-arm64.zip
+            release-assets/KinenSatsuei-macos-arm64.zip
+            release-assets/KinenSatsuei-android-unsigned.apk
+            release-assets/KinenSatsuei-android-debug.apk
+            release-assets/KinenSatsuei-windows-x64.zip
+          )
+          for file in "${files[@]}"; do
+            test -s "$file"
+          done
+          if gh release view -- "$TAG" >/dev/null 2>&1; then
+            echo "Release already exists. Leaving its assets in place."
+            exit 0
+          fi
+          gh release create --verify-tag --generate-notes --title "$TAG" -- "$TAG" "${files[@]}"
