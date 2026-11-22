@@ -13,8 +13,8 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 30
     env:
-      DERIVED_DATA: ${{ runner.temp }}/kinen-build
-      DIST: ${{ runner.temp }}/kinen-dist
+      DERIVED_DATA: ${{ github.workspace }}/.tmp/kinen-build
+      DIST: ${{ github.workspace }}/.tmp/kinen-dist
     steps:
       - uses: actions/checkout@v7
         with:
