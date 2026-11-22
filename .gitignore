@@ -5,6 +5,7 @@ DerivedData/
 build/
 target/
 .gradle/
+.kotlin/
 local.properties
 .swiftpm/
 xcuserdata/
@@ -19,3 +20,7 @@ xcuserdata/
 id_ed25519*
 id_rsa*
 local-library/
+
+apps/windows/**/bin/
+apps/windows/**/obj/
+apps/windows/.vs/

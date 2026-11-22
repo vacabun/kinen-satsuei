@@ -1,234 +1,278 @@
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
-	classes = {};
+	classes = {
+	};
 	objectVersion = 60;
 	objects = {
-		000000000000000000000001 = {
-			isa = "PBXFileReference";
-			lastKnownFileType = "sourcecode.swift";
-			path = "JournalView.swift";
-			sourceTree = "<group>";
-		};
-		000000000000000000000002 = {
-			isa = "PBXFileReference";
-			lastKnownFileType = "sourcecode.swift";
-			path = "KinenSatsueiApp.swift";
-			sourceTree = "<group>";
-		};
-		000000000000000000000003 = {
-			isa = "PBXFileReference";
-			lastKnownFileType = "sourcecode.swift";
-			path = "LibraryView.swift";
-			sourceTree = "<group>";
-		};
-		000000000000000000000004 = {
-			isa = "PBXFileReference";
-			lastKnownFileType = "sourcecode.swift";
-			path = "MediaImportView.swift";
-			sourceTree = "<group>";
-		};
-		000000000000000000000005 = {
-			isa = "PBXGroup";
-			path = "KinenSatsuei";
-			children = (
-				"000000000000000000000001",
-				"000000000000000000000002",
-				"000000000000000000000003",
-				"000000000000000000000004",
+
+/* Begin PBXBuildFile section */
+		CE4C00200000000000000008 /* PhotoInspectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00200000000000000007 /* PhotoInspectionView.swift */; };
+		CE4C00200000000000000006 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00200000000000000005 /* ThumbnailCache.swift */; };
+		CE4C00200000000000000004 /* NoteMediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00200000000000000003 /* NoteMediaPicker.swift */; };
+		CE4C00200000000000000002 /* JournalEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00200000000000000001 /* JournalEditor.swift */; };
+		CE4C00100000000000000007 /* GitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00100000000000000008 /* GitSettings.swift */; };
+		CE4C00100000000000000005 /* ChekiCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00100000000000000006 /* ChekiCropView.swift */; };
+		CE4C00100000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE4C00100000000000000004 /* Assets.xcassets */; };
+		CE4C00100000000000000001 /* ChekiCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C00100000000000000002 /* ChekiCameraView.swift */; };
+		00000000000000000000000B /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000001 /* JournalView.swift */; };
+		00000000000000000000000C /* KinenSatsueiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000002 /* KinenSatsueiApp.swift */; };
+		00000000000000000000000D /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000003 /* LibraryView.swift */; };
+		00000000000000000000000E /* MediaImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000000004 /* MediaImportView.swift */; };
+		000000000000000000000010 /* KinenCore in Frameworks */ = {isa = PBXBuildFile; productRef = 00000000000000000000000A /* KinenCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CE4C00200000000000000007 /* PhotoInspectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInspectionView.swift; sourceTree = "<group>"; };
+		CE4C00200000000000000005 /* ThumbnailCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
+		CE4C00200000000000000003 /* NoteMediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteMediaPicker.swift; sourceTree = "<group>"; };
+		CE4C00200000000000000001 /* JournalEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEditor.swift; sourceTree = "<group>"; };
+		CE4C00100000000000000008 /* GitSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GitSettings.swift; path = "../apple-shared/GitSettings.swift"; sourceTree = SOURCE_ROOT; };
+		CE4C00100000000000000006 /* ChekiCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekiCropView.swift; sourceTree = "<group>"; };
+		CE4C00100000000000000004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE4C00100000000000000002 /* ChekiCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekiCameraView.swift; sourceTree = "<group>"; };
+		000000000000000000000001 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		000000000000000000000002 /* KinenSatsueiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinenSatsueiApp.swift; sourceTree = "<group>"; };
+		000000000000000000000003 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		000000000000000000000004 /* MediaImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaImportView.swift; sourceTree = "<group>"; };
+		000000000000000000000006 /* KinenSatsuei.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = KinenSatsuei.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000000011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000000010 /* KinenCore in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000000005 /* KinenSatsuei */ = {
+			isa = PBXGroup;
+			children = (
+				CE4C00200000000000000007 /* PhotoInspectionView.swift */,
+				CE4C00200000000000000005 /* ThumbnailCache.swift */,
+				CE4C00200000000000000001 /* JournalEditor.swift */,
+				CE4C00200000000000000003 /* NoteMediaPicker.swift */,
+				000000000000000000000001 /* JournalView.swift */,
+				000000000000000000000002 /* KinenSatsueiApp.swift */,
+				000000000000000000000003 /* LibraryView.swift */,
+				000000000000000000000004 /* MediaImportView.swift */,
+				CE4C00100000000000000002 /* ChekiCameraView.swift */,
+				CE4C00100000000000000006 /* ChekiCropView.swift */,
+				CE4C00100000000000000004 /* Assets.xcassets */,
+			);
+			path = KinenSatsuei;
 			sourceTree = "<group>";
 		};
-		000000000000000000000006 = {
-			isa = "PBXFileReference";
-			explicitFileType = "wrapper.application";
-			path = "KinenSatsuei.app";
-			sourceTree = "BUILT_PRODUCTS_DIR";
-		};
-		000000000000000000000007 = {
-			isa = "PBXGroup";
-			name = "Products";
+		000000000000000000000007 /* Products */ = {
+			isa = PBXGroup;
 			children = (
-				"000000000000000000000006",
+				000000000000000000000006 /* KinenSatsuei.app */,
 			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		000000000000000000000008 = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
-				"000000000000000000000005",
-				"000000000000000000000007",
+				000000000000000000000005 /* KinenSatsuei */,
+				CE4C00100000000000000008 /* GitSettings.swift */,
+				000000000000000000000007 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		000000000000000000000009 = {
-			isa = "XCLocalSwiftPackageReference";
-			relativePath = "../../packages/apple";
-		};
-		00000000000000000000000A = {
-			isa = "XCSwiftPackageProductDependency";
-			package = "000000000000000000000009";
-			productName = "KinenCore";
-		};
-		00000000000000000000000B = {
-			isa = "PBXBuildFile";
-			fileRef = "000000000000000000000001";
-		};
-		00000000000000000000000C = {
-			isa = "PBXBuildFile";
-			fileRef = "000000000000000000000002";
-		};
-		00000000000000000000000D = {
-			isa = "PBXBuildFile";
-			fileRef = "000000000000000000000003";
-		};
-		00000000000000000000000E = {
-			isa = "PBXBuildFile";
-			fileRef = "000000000000000000000004";
-		};
-		00000000000000000000000F = {
-			isa = "PBXSourcesBuildPhase";
-			buildActionMask = "2147483647";
-			files = (
-				"00000000000000000000000B",
-				"00000000000000000000000C",
-				"00000000000000000000000D",
-				"00000000000000000000000E",
-			);
-			runOnlyForDeploymentPostprocessing = "0";
-		};
-		000000000000000000000010 = {
-			isa = "PBXBuildFile";
-			productRef = "00000000000000000000000A";
-		};
-		000000000000000000000011 = {
-			isa = "PBXFrameworksBuildPhase";
-			buildActionMask = "2147483647";
-			files = (
-				"000000000000000000000010",
-			);
-			runOnlyForDeploymentPostprocessing = "0";
-		};
-		000000000000000000000012 = {
-			isa = "PBXResourcesBuildPhase";
-			buildActionMask = "2147483647";
-			files = ();
-			runOnlyForDeploymentPostprocessing = "0";
-		};
-		000000000000000000000013 = {
-			isa = "XCBuildConfiguration";
-			name = "Debug";
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = "NO";
-				PRODUCT_NAME = "KinenSatsuei";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vacabun.kinensatsuei";
-				SWIFT_VERSION = "5.0";
-				IPHONEOS_DEPLOYMENT_TARGET = "17.0";
-				GENERATE_INFOPLIST_FILE = "YES";
-				INFOPLIST_KEY_CFBundleDisplayName = "記念撮影";
-				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机扫描拍立得并保存到本机手帐。";
-				INFOPLIST_KEY_UILaunchScreen_Generation = "YES";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				SDKROOT = "iphoneos";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				CODE_SIGN_STYLE = "Automatic";
-				CURRENT_PROJECT_VERSION = "1";
-				MARKETING_VERSION = "0.1.0";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				ENABLE_TESTABILITY = "YES";
-			};
-		};
-		000000000000000000000014 = {
-			isa = "XCBuildConfiguration";
-			name = "Release";
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = "NO";
-				PRODUCT_NAME = "KinenSatsuei";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vacabun.kinensatsuei";
-				SWIFT_VERSION = "5.0";
-				IPHONEOS_DEPLOYMENT_TARGET = "17.0";
-				GENERATE_INFOPLIST_FILE = "YES";
-				INFOPLIST_KEY_CFBundleDisplayName = "記念撮影";
-				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机扫描拍立得并保存到本机手帐。";
-				INFOPLIST_KEY_UILaunchScreen_Generation = "YES";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				SDKROOT = "iphoneos";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				CODE_SIGN_STYLE = "Automatic";
-				CURRENT_PROJECT_VERSION = "1";
-				MARKETING_VERSION = "0.1.0";
-			};
-		};
-		000000000000000000000015 = {
-			isa = "XCConfigurationList";
-			defaultConfigurationName = "Release";
-			defaultConfigurationIsVisible = "0";
-			buildConfigurations = (
-				"000000000000000000000013",
-				"000000000000000000000014",
-			);
-		};
-		000000000000000000000016 = {
-			isa = "PBXNativeTarget";
-			buildConfigurationList = "000000000000000000000015";
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000000016 /* KinenSatsuei */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000000000000000000000015 /* Build configuration list for PBXNativeTarget "KinenSatsuei" */;
 			buildPhases = (
-				"00000000000000000000000F",
-				"000000000000000000000011",
-				"000000000000000000000012",
+				00000000000000000000000F /* Sources */,
+				000000000000000000000011 /* Frameworks */,
+				000000000000000000000012 /* Resources */,
 			);
-			buildRules = ();
-			dependencies = ();
-			name = "KinenSatsuei";
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinenSatsuei;
 			packageProductDependencies = (
-				"00000000000000000000000A",
+				00000000000000000000000A /* KinenCore */,
 			);
-			productName = "KinenSatsuei";
-			productReference = "000000000000000000000006";
+			productName = KinenSatsuei;
+			productReference = 000000000000000000000006 /* KinenSatsuei.app */;
 			productType = "com.apple.product-type.application";
 		};
-		000000000000000000000017 = {
-			isa = "XCBuildConfiguration";
-			name = "Debug";
-			buildSettings = {};
-		};
-		000000000000000000000018 = {
-			isa = "XCBuildConfiguration";
-			name = "Release";
-			buildSettings = {};
-		};
-		000000000000000000000019 = {
-			isa = "XCConfigurationList";
-			defaultConfigurationName = "Release";
-			defaultConfigurationIsVisible = "0";
-			buildConfigurations = (
-				"000000000000000000000017",
-				"000000000000000000000018",
-			);
-		};
-		00000000000000000000001A = {
-			isa = "PBXProject";
-			buildConfigurationList = "000000000000000000000019";
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		00000000000000000000001A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 000000000000000000000019 /* Build configuration list for PBXProject "KinenSatsuei" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = "zh-Hans";
-			hasScannedForEncodings = "0";
+			hasScannedForEncodings = 0;
 			knownRegions = (
 				"zh-Hans",
-				"en",
-				"Base",
+				en,
+				Base,
 			);
-			mainGroup = "000000000000000000000008";
+			mainGroup = 000000000000000000000008;
 			packageReferences = (
-				"000000000000000000000009",
+				000000000000000000000009 /* XCLocalSwiftPackageReference "../../packages/apple" */,
 			);
-			productRefGroup = "000000000000000000000007";
+			productRefGroup = 000000000000000000000007 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"000000000000000000000016",
+				000000000000000000000016 /* KinenSatsuei */,
 			);
 		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000000012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE4C00100000000000000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00000000000000000000000F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE4C00200000000000000008 /* PhotoInspectionView.swift in Sources */,
+				CE4C00200000000000000006 /* ThumbnailCache.swift in Sources */,
+				CE4C00200000000000000002 /* JournalEditor.swift in Sources */,
+				CE4C00200000000000000004 /* NoteMediaPicker.swift in Sources */,
+				00000000000000000000000B /* JournalView.swift in Sources */,
+				00000000000000000000000C /* KinenSatsueiApp.swift in Sources */,
+				00000000000000000000000D /* LibraryView.swift in Sources */,
+				00000000000000000000000E /* MediaImportView.swift in Sources */,
+				CE4C00100000000000000001 /* ChekiCameraView.swift in Sources */,
+				CE4C00100000000000000005 /* ChekiCropView.swift in Sources */,
+				CE4C00100000000000000007 /* GitSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		000000000000000000000013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6C2L5CH28C;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "記念撮影";
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机扫描拍立得、拍照或录制视频。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "录制视频时使用麦克风收录声音。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "连接你在局域网内自建的 Git 资料库。";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacabun.kinensatsuei;
+				PRODUCT_NAME = KinenSatsuei;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		000000000000000000000014 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6C2L5CH28C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "記念撮影";
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机扫描拍立得、拍照或录制视频。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "录制视频时使用麦克风收录声音。";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "连接你在局域网内自建的 Git 资料库。";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vacabun.kinensatsuei;
+				PRODUCT_NAME = KinenSatsuei;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		000000000000000000000017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		000000000000000000000018 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000000000000000000000015 /* Build configuration list for PBXNativeTarget "KinenSatsuei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000000013 /* Debug */,
+				000000000000000000000014 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000000000000000000000019 /* Build configuration list for PBXProject "KinenSatsuei" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000000017 /* Debug */,
+				000000000000000000000018 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		000000000000000000000009 /* XCLocalSwiftPackageReference "../../packages/apple" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../packages/apple;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00000000000000000000000A /* KinenCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000000000000000000000009 /* XCLocalSwiftPackageReference "../../packages/apple" */;
+			productName = KinenCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 00000000000000000000001A;
+	rootObject = 00000000000000000000001A /* Project object */;
 }

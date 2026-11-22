@@ -1,0 +1,58 @@
+name: iOS build and package
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ios:
+    runs-on: macos-26
+    timeout-minutes: 30
+    env:
+      DERIVED_DATA: ${{ runner.temp }}/kinen-build
+      DIST: ${{ runner.temp }}/kinen-dist
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Test shared Apple code
+        run: swift test --package-path packages/apple
+
+      - name: Build iOS Simulator app
+        run: |
+          xcodebuild -project apps/ios/KinenSatsuei.xcodeproj -scheme KinenSatsuei \
+            -configuration Release -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$DERIVED_DATA" ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+
+      - name: Build unsigned iPhone app
+        if: github.ref_type == 'tag'
+        run: |
+          xcodebuild -project apps/ios/KinenSatsuei.xcodeproj -scheme KinenSatsuei \
+            -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' \
+            -derivedDataPath "$DERIVED_DATA" CODE_SIGNING_ALLOWED=NO build
+
+      - name: Package iOS builds
+        if: github.ref_type == 'tag'
+        run: |
+          products="$DERIVED_DATA/Build/Products"
+          staging="$(mktemp -d)"
+          trap 'rm -rf "$staging"' EXIT
+          mkdir -p "$staging/Payload" "$DIST"
+          ditto "$products/Release-iphoneos/KinenSatsuei.app" "$staging/Payload/KinenSatsuei.app"
+          ditto -c -k --keepParent "$staging/Payload" "$DIST/KinenSatsuei-unsigned.ipa"
+          ditto -c -k --keepParent "$products/Release-iphonesimulator/KinenSatsuei.app" \
+            "$DIST/KinenSatsuei-simulator-arm64.zip"
+
+      - name: Upload packages
+        if: github.ref_type == 'tag'
+        uses: actions/upload-artifact@v7
+        with:
+          name: kinen-satsuei-ios
+          path: ${{ env.DIST }}
+          if-no-files-found: error
+          compression-level: 0

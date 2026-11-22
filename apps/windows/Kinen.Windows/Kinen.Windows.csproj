@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>KinenSatsuei</AssemblyName>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+    <GitHelperArch Condition="'$(RuntimeIdentifier)' == 'win-arm64'">arm64</GitHelperArch>
+    <GitHelperArch Condition="'$(GitHelperArch)' == ''">amd64</GitHelperArch>
+    <GitHelperPath>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/$(BaseIntermediateOutputPath)kinen-git/$(GitHelperArch)/kinen-git.exe'))</GitHelperPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Kinen.Windows.Core/Kinen.Windows.Core.csproj"/>
+    <Resource Include="AppIcon.ico"/>
+    <Content Include="$(GitHelperPath)" Link="kinen-git.exe" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
+  </ItemGroup>
+  <Target Name="BuildGitHelper" BeforeTargets="PrepareForBuild">
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(GitHelperPath)'))"/>
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)/../../../packages/core"
+          EnvironmentVariables="GOOS=windows;GOARCH=$(GitHelperArch);CGO_ENABLED=0"
+          Command="go build -trimpath -o &quot;$(GitHelperPath)&quot; ./cmd/kinen-git"/>
+  </Target>
+</Project>

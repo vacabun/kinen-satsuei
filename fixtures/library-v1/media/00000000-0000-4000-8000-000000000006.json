@@ -1,0 +1,18 @@
+{
+  "captureDate": "2026-11-21",
+  "createdAt": "2026-11-21T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000000000006",
+  "kind": "cheki",
+  "memberIds": [
+    "00000000-0000-4000-8000-000000000002"
+  ],
+  "note": "虚构拍立得",
+  "original": {
+    "byteLength": 204,
+    "mimeType": "image/png",
+    "originalFilename": "fixture.png",
+    "sha256": "196c4a371ecbe6585a7b9ddebb9de4ab9bdbf10c9e532b39c9d1db1076ea3415",
+    "storedFilename": "00000000-0000-4000-8000-000000000002_2026-11-21_00000000-0000-4000-8000-000000000006.png"
+  },
+  "updatedAt": "2026-11-21T00:00:00Z"
+}
